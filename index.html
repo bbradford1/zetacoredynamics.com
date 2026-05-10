@@ -1,0 +1,1234 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>ZetaCore Dynamics — Enterprise Software Solutions</title>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --navy: #0B1F3A;
+      --navy-mid: #162E52;
+      --blue: #1A4B8C;
+      --blue-light: #2563C0;
+      --accent: #2E7AE0;
+      --accent-light: #5B9BF0;
+      --white: #FFFFFF;
+      --off-white: #F8F9FC;
+      --gray-100: #F1F4F9;
+      --gray-200: #E2E8F2;
+      --gray-400: #94A3B8;
+      --gray-600: #475569;
+      --gray-800: #1E293B;
+      --font-display: 'Cormorant Garamond', Georgia, serif;
+      --font-body: 'DM Sans', sans-serif;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: var(--font-body);
+      background: var(--white);
+      color: var(--gray-800);
+      line-height: 1.6;
+      overflow-x: hidden;
+    }
+
+    /* ── NAV ── */
+    nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 0 5%;
+      height: 72px;
+      background: rgba(255,255,255,0.95);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--gray-200);
+    }
+
+    .nav-logo { display: flex; align-items: center; gap: 14px; text-decoration: none; }
+
+    .logo-mark {
+      width: 40px; height: 40px;
+      position: relative; flex-shrink: 0;
+    }
+
+    .logo-mark svg { width: 100%; height: 100%; }
+
+    .logo-text { display: flex; flex-direction: column; line-height: 1; }
+    .logo-text .company { font-family: var(--font-display); font-size: 18px; font-weight: 700; color: var(--navy); letter-spacing: 0.02em; }
+    .logo-text .tagline-small { font-size: 9px; font-weight: 500; color: var(--accent); letter-spacing: 0.18em; text-transform: uppercase; margin-top: 2px; }
+
+    .nav-links { display: flex; align-items: center; gap: 36px; list-style: none; }
+    .nav-links a { font-size: 13px; font-weight: 500; color: var(--gray-600); text-decoration: none; letter-spacing: 0.04em; transition: color 0.2s; }
+    .nav-links a:hover { color: var(--accent); }
+
+    .nav-cta {
+      background: var(--navy); color: var(--white);
+      padding: 10px 22px; border-radius: 4px;
+      font-size: 13px; font-weight: 500; text-decoration: none;
+      letter-spacing: 0.04em; transition: background 0.2s;
+    }
+    .nav-cta:hover { background: var(--blue-light); }
+
+    /* ── HERO ── */
+    .hero {
+      min-height: 100vh;
+      display: flex; align-items: center;
+      padding: 120px 5% 80px;
+      position: relative;
+      overflow: hidden;
+      background: var(--white);
+    }
+
+    .hero-bg {
+      position: absolute; inset: 0; z-index: 0;
+      background:
+        linear-gradient(135deg, rgba(37,99,192,0.04) 0%, transparent 60%),
+        radial-gradient(ellipse at 80% 50%, rgba(46,122,224,0.06) 0%, transparent 60%);
+    }
+
+    .hero-grid {
+      position: absolute; inset: 0; z-index: 0;
+      background-image:
+        linear-gradient(rgba(26,75,140,0.06) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(26,75,140,0.06) 1px, transparent 1px);
+      background-size: 60px 60px;
+      mask-image: radial-gradient(ellipse at center, black 20%, transparent 80%);
+    }
+
+    .hero-content { position: relative; z-index: 1; max-width: 760px; }
+
+    .hero-eyebrow {
+      display: inline-flex; align-items: center; gap: 10px;
+      font-size: 11px; font-weight: 600; letter-spacing: 0.2em;
+      text-transform: uppercase; color: var(--accent);
+      margin-bottom: 28px;
+    }
+
+    .hero-eyebrow::before {
+      content: ''; display: block;
+      width: 32px; height: 1px; background: var(--accent);
+    }
+
+    h1 {
+      font-family: var(--font-display);
+      font-size: clamp(48px, 6vw, 80px);
+      font-weight: 600; line-height: 1.1;
+      color: var(--navy);
+      margin-bottom: 28px;
+      letter-spacing: -0.01em;
+    }
+
+    h1 em {
+      font-style: italic; color: var(--accent);
+    }
+
+    .hero-desc {
+      font-size: 17px; font-weight: 300;
+      color: var(--gray-600); line-height: 1.75;
+      max-width: 560px; margin-bottom: 48px;
+    }
+
+    .hero-actions { display: flex; gap: 16px; flex-wrap: wrap; }
+
+    .btn-primary {
+      background: var(--navy); color: var(--white);
+      padding: 15px 32px; border-radius: 4px;
+      font-size: 14px; font-weight: 500; text-decoration: none;
+      letter-spacing: 0.04em; transition: all 0.2s;
+      border: 1px solid var(--navy);
+    }
+    .btn-primary:hover { background: var(--blue-light); border-color: var(--blue-light); }
+
+    .btn-secondary {
+      background: transparent; color: var(--navy);
+      padding: 15px 32px; border-radius: 4px;
+      font-size: 14px; font-weight: 500; text-decoration: none;
+      letter-spacing: 0.04em; transition: all 0.2s;
+      border: 1px solid var(--gray-200);
+    }
+    .btn-secondary:hover { border-color: var(--navy); }
+
+    .hero-stats {
+      display: flex; gap: 48px; margin-top: 72px;
+      padding-top: 48px;
+      border-top: 1px solid var(--gray-200);
+    }
+
+    .stat-item { }
+    .stat-value { font-family: var(--font-display); font-size: 36px; font-weight: 700; color: var(--navy); line-height: 1; }
+    .stat-label { font-size: 12px; font-weight: 500; color: var(--gray-400); letter-spacing: 0.1em; text-transform: uppercase; margin-top: 6px; }
+
+    /* ── SECTION BASE ── */
+    section { padding: 100px 5%; }
+
+    .section-label {
+      display: inline-flex; align-items: center; gap: 10px;
+      font-size: 11px; font-weight: 600; letter-spacing: 0.2em;
+      text-transform: uppercase; color: var(--accent);
+      margin-bottom: 20px;
+    }
+    .section-label::before {
+      content: ''; display: block;
+      width: 24px; height: 1px; background: var(--accent);
+    }
+
+    h2 {
+      font-family: var(--font-display);
+      font-size: clamp(32px, 4vw, 52px);
+      font-weight: 600; line-height: 1.15;
+      color: var(--navy); letter-spacing: -0.01em;
+      margin-bottom: 20px;
+    }
+
+    .section-desc {
+      font-size: 16px; font-weight: 300;
+      color: var(--gray-600); line-height: 1.75;
+      max-width: 580px; margin-bottom: 60px;
+    }
+
+    /* ── ABOUT ── */
+    .about { background: var(--off-white); }
+
+    .about-grid {
+      display: grid; grid-template-columns: 1fr 1fr;
+      gap: 80px; align-items: center;
+    }
+
+    .about-visual {
+      position: relative;
+    }
+
+    .about-card {
+      background: var(--white);
+      border: 1px solid var(--gray-200);
+      border-radius: 8px;
+      padding: 36px;
+      position: relative;
+    }
+
+    .about-card::before {
+      content: '';
+      position: absolute; top: 0; left: 0;
+      width: 4px; height: 100%;
+      background: linear-gradient(to bottom, var(--accent), var(--navy));
+      border-radius: 8px 0 0 8px;
+    }
+
+    .about-card-icon {
+      width: 48px; height: 48px;
+      background: linear-gradient(135deg, var(--accent), var(--navy));
+      border-radius: 8px;
+      display: flex; align-items: center; justify-content: center;
+      margin-bottom: 20px;
+    }
+
+    .about-card h3 {
+      font-family: var(--font-display);
+      font-size: 22px; font-weight: 600;
+      color: var(--navy); margin-bottom: 10px;
+    }
+
+    .about-card p {
+      font-size: 14px; color: var(--gray-600); line-height: 1.7;
+    }
+
+    .about-cards { display: flex; flex-direction: column; gap: 20px; }
+
+    .about-text p {
+      font-size: 16px; font-weight: 300;
+      color: var(--gray-600); line-height: 1.8;
+      margin-bottom: 20px;
+    }
+
+    .values-list { list-style: none; margin-top: 32px; }
+    .values-list li {
+      display: flex; align-items: flex-start; gap: 14px;
+      font-size: 14px; color: var(--gray-600);
+      padding: 12px 0; border-bottom: 1px solid var(--gray-200);
+    }
+    .values-list li:last-child { border-bottom: none; }
+    .check {
+      width: 20px; height: 20px; flex-shrink: 0;
+      background: var(--accent); border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      margin-top: 1px;
+    }
+    .check svg { width: 10px; height: 10px; }
+
+    /* ── PROJECTS ── */
+    .projects { background: var(--white); }
+
+    .projects-grid {
+      display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+      gap: 28px;
+    }
+
+    .project-card {
+      border: 1px solid var(--gray-200); border-radius: 8px;
+      padding: 36px; position: relative; overflow: hidden;
+      transition: all 0.3s; cursor: default;
+      background: var(--white);
+    }
+
+    .project-card:hover {
+      border-color: var(--accent);
+      box-shadow: 0 12px 40px rgba(46,122,224,0.08);
+      transform: translateY(-2px);
+    }
+
+    .project-card.featured {
+      border-color: var(--navy);
+      background: linear-gradient(135deg, var(--navy) 0%, var(--blue) 100%);
+      color: var(--white);
+    }
+
+    .project-card.featured:hover {
+      border-color: var(--accent-light);
+      box-shadow: 0 12px 40px rgba(11,31,58,0.2);
+    }
+
+    .project-badge {
+      display: inline-block;
+      font-size: 10px; font-weight: 600; letter-spacing: 0.15em;
+      text-transform: uppercase; padding: 4px 12px; border-radius: 20px;
+      margin-bottom: 24px;
+    }
+
+    .project-card.featured .project-badge {
+      background: rgba(255,255,255,0.15); color: rgba(255,255,255,0.9);
+    }
+
+    .project-card:not(.featured) .project-badge {
+      background: var(--gray-100); color: var(--accent);
+    }
+
+    .project-card h3 {
+      font-family: var(--font-display);
+      font-size: 26px; font-weight: 600;
+      margin-bottom: 12px; line-height: 1.2;
+    }
+
+    .project-card.featured h3 { color: var(--white); }
+    .project-card:not(.featured) h3 { color: var(--navy); }
+
+    .project-card p {
+      font-size: 14px; line-height: 1.75; margin-bottom: 28px;
+    }
+    .project-card.featured p { color: rgba(255,255,255,0.75); }
+    .project-card:not(.featured) p { color: var(--gray-600); }
+
+    .project-tags { display: flex; flex-wrap: wrap; gap: 8px; }
+    .project-tag {
+      font-size: 11px; font-weight: 500; padding: 4px 10px; border-radius: 3px;
+    }
+    .project-card.featured .project-tag {
+      background: rgba(255,255,255,0.12); color: rgba(255,255,255,0.8);
+    }
+    .project-card:not(.featured) .project-tag {
+      background: var(--gray-100); color: var(--gray-600);
+    }
+
+    .project-coming-soon {
+      position: absolute; top: 24px; right: 24px;
+      font-size: 10px; font-weight: 600; letter-spacing: 0.1em;
+      text-transform: uppercase; padding: 4px 10px; border-radius: 3px;
+    }
+
+    .project-card.featured .project-coming-soon {
+      background: rgba(255,255,255,0.15); color: rgba(255,255,255,0.7);
+    }
+
+    .project-card:not(.featured) .project-coming-soon {
+      background: var(--gray-100); color: var(--gray-400);
+    }
+
+    /* ── INDUSTRIES ── */
+    .industries { background: var(--off-white); }
+
+    .industries-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 2px;
+      border: 1px solid var(--gray-200);
+      border-radius: 8px;
+      overflow: hidden;
+    }
+
+    .industry-item {
+      background: var(--white);
+      padding: 28px 24px;
+      transition: all 0.2s;
+      cursor: default;
+    }
+
+    .industry-item:hover {
+      background: var(--navy);
+    }
+
+    .industry-item:hover .industry-name { color: var(--white); }
+    .industry-item:hover .industry-icon { color: var(--accent-light); }
+
+    .industry-icon {
+      font-size: 24px; color: var(--accent);
+      margin-bottom: 12px; display: block;
+      transition: color 0.2s;
+    }
+
+    .industry-name {
+      font-size: 13px; font-weight: 500;
+      color: var(--navy); letter-spacing: 0.02em;
+      transition: color 0.2s;
+    }
+
+    /* ── CONTACT ── */
+    .contact { background: var(--white); }
+
+    .contact-inner {
+      display: grid; grid-template-columns: 1fr 1fr;
+      gap: 80px; align-items: start;
+    }
+
+    .contact-info { }
+    .contact-info h2 { margin-bottom: 16px; }
+    .contact-info p {
+      font-size: 16px; font-weight: 300;
+      color: var(--gray-600); line-height: 1.75;
+      margin-bottom: 40px;
+    }
+
+    .contact-detail {
+      display: flex; align-items: center; gap: 16px;
+      padding: 16px 0; border-bottom: 1px solid var(--gray-200);
+    }
+
+    .contact-detail:last-child { border-bottom: none; }
+
+    .contact-icon {
+      width: 40px; height: 40px; flex-shrink: 0;
+      background: var(--gray-100); border-radius: 6px;
+      display: flex; align-items: center; justify-content: center;
+    }
+
+    .contact-detail-text { }
+    .contact-detail-label { font-size: 11px; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; color: var(--gray-400); margin-bottom: 2px; }
+    .contact-detail-value { font-size: 14px; font-weight: 500; color: var(--navy); }
+    .contact-detail-value a { color: var(--accent); text-decoration: none; }
+    .contact-detail-value a:hover { text-decoration: underline; }
+
+    .contact-form {
+      background: var(--off-white);
+      border: 1px solid var(--gray-200);
+      border-radius: 8px; padding: 40px;
+    }
+
+    .contact-form h3 {
+      font-family: var(--font-display);
+      font-size: 24px; font-weight: 600;
+      color: var(--navy); margin-bottom: 28px;
+    }
+
+    .form-group { margin-bottom: 20px; }
+    .form-group label {
+      display: block; font-size: 12px; font-weight: 600;
+      letter-spacing: 0.08em; text-transform: uppercase;
+      color: var(--gray-600); margin-bottom: 8px;
+    }
+
+    .form-group input,
+    .form-group textarea,
+    .form-group select {
+      width: 100%; padding: 12px 16px;
+      background: var(--white);
+      border: 1px solid var(--gray-200); border-radius: 4px;
+      font-family: var(--font-body); font-size: 14px;
+      color: var(--gray-800); outline: none;
+      transition: border-color 0.2s;
+    }
+
+    .form-group input:focus,
+    .form-group textarea:focus,
+    .form-group select:focus {
+      border-color: var(--accent);
+    }
+
+    .form-group textarea { height: 100px; resize: vertical; }
+
+    .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+
+    .form-submit {
+      width: 100%;
+      background: var(--navy); color: var(--white);
+      padding: 14px; border: none; border-radius: 4px;
+      font-family: var(--font-body); font-size: 14px; font-weight: 500;
+      letter-spacing: 0.06em; text-transform: uppercase;
+      cursor: pointer; transition: background 0.2s; margin-top: 8px;
+    }
+    .form-submit:hover { background: var(--blue-light); }
+
+    /* ── FOOTER ── */
+    footer {
+      background: var(--navy);
+      color: rgba(255,255,255,0.6);
+      padding: 60px 5% 40px;
+    }
+
+    .footer-top {
+      display: flex; justify-content: space-between; align-items: flex-start;
+      padding-bottom: 40px;
+      border-bottom: 1px solid rgba(255,255,255,0.1);
+      margin-bottom: 40px;
+    }
+
+    .footer-brand .company {
+      font-family: var(--font-display);
+      font-size: 22px; font-weight: 700;
+      color: var(--white); margin-bottom: 8px;
+    }
+
+    .footer-brand p {
+      font-size: 13px; max-width: 280px; line-height: 1.7;
+    }
+
+    .footer-links h4 {
+      font-size: 11px; font-weight: 600;
+      letter-spacing: 0.15em; text-transform: uppercase;
+      color: var(--white); margin-bottom: 16px;
+    }
+
+    .footer-links ul { list-style: none; }
+    .footer-links li { margin-bottom: 10px; }
+    .footer-links a {
+      font-size: 13px; color: rgba(255,255,255,0.5);
+      text-decoration: none; transition: color 0.2s;
+    }
+    .footer-links a:hover { color: var(--white); }
+
+    .footer-bottom {
+      display: flex; justify-content: space-between; align-items: center;
+      font-size: 12px;
+    }
+
+    .footer-bottom a { color: rgba(255,255,255,0.4); text-decoration: none; }
+
+    /* ── ADC DEEP DIVE ── */
+    .adc-section { background: var(--navy); padding: 100px 5%; color: white; }
+    .adc-section .section-label { color: var(--accent-light); }
+    .adc-section .section-label::before { background: var(--accent-light); }
+    .adc-section h2 { color: white; }
+    .adc-section .section-desc { color: rgba(255,255,255,0.65); }
+
+    .adc-hero-block {
+      display: grid; grid-template-columns: 1fr 1fr;
+      gap: 48px; align-items: start;
+      margin-bottom: 60px;
+    }
+
+    .adc-hero-text h3 {
+      font-family: var(--font-display); font-size: 28px;
+      font-weight: 600; color: white; margin-bottom: 16px;
+    }
+
+    .adc-hero-text p {
+      font-size: 15px; color: rgba(255,255,255,0.7);
+      line-height: 1.8; margin-bottom: 16px;
+    }
+
+    .adc-pitch-box {
+      background: rgba(255,255,255,0.05);
+      border: 1px solid rgba(255,255,255,0.12);
+      border-left: 4px solid var(--accent);
+      border-radius: 8px; padding: 32px;
+    }
+
+    .adc-pitch-label {
+      font-size: 10px; font-weight: 600; letter-spacing: 0.2em;
+      text-transform: uppercase; color: var(--accent-light);
+      margin-bottom: 16px;
+    }
+
+    .adc-quote {
+      font-family: var(--font-display); font-size: 20px;
+      font-style: italic; color: white; line-height: 1.6;
+      font-weight: 500;
+    }
+
+    .adc-wins-grid {
+      display: grid; grid-template-columns: repeat(4, 1fr);
+      gap: 20px; margin-bottom: 72px;
+    }
+
+    .adc-win-card {
+      background: rgba(255,255,255,0.05);
+      border: 1px solid rgba(255,255,255,0.1);
+      border-radius: 8px; padding: 28px 24px;
+      transition: all 0.2s;
+    }
+
+    .adc-win-card:hover {
+      background: rgba(46,122,224,0.15);
+      border-color: var(--accent);
+    }
+
+    .adc-win-icon { font-size: 28px; margin-bottom: 14px; }
+
+    .adc-win-card h4 {
+      font-size: 15px; font-weight: 600;
+      color: white; margin-bottom: 10px;
+    }
+
+    .adc-win-card p {
+      font-size: 13px; color: rgba(255,255,255,0.6); line-height: 1.7;
+    }
+
+    .adc-built-section { margin-bottom: 72px; }
+
+    .adc-built-section h3 {
+      font-family: var(--font-display); font-size: 32px;
+      font-weight: 600; color: white; margin-bottom: 32px;
+    }
+
+    .adc-not-vapor {
+      font-size: 18px; font-style: italic;
+      color: var(--accent-light); font-family: var(--font-display);
+    }
+
+    .adc-built-grid {
+      display: grid; grid-template-columns: 1fr 1fr;
+      gap: 2px; border: 1px solid rgba(255,255,255,0.1);
+      border-radius: 8px; overflow: hidden;
+    }
+
+    .adc-built-item {
+      display: flex; gap: 20px; align-items: flex-start;
+      padding: 28px; background: rgba(255,255,255,0.03);
+      transition: background 0.2s;
+    }
+
+    .adc-built-item:hover { background: rgba(46,122,224,0.1); }
+
+    .adc-built-icon {
+      font-size: 24px; flex-shrink: 0; margin-top: 2px;
+    }
+
+    .adc-built-item h4 {
+      font-size: 14px; font-weight: 600;
+      color: white; margin-bottom: 6px;
+    }
+
+    .adc-built-item p {
+      font-size: 13px; color: rgba(255,255,255,0.6); line-height: 1.7;
+    }
+
+    .adc-roadmap h3 {
+      font-family: var(--font-display); font-size: 32px;
+      font-weight: 600; color: white; margin-bottom: 32px;
+    }
+
+    .adc-roadmap-grid {
+      display: grid; grid-template-columns: repeat(3, 1fr);
+      gap: 24px;
+    }
+
+    .adc-roadmap-item {
+      display: flex; gap: 16px; align-items: flex-start;
+    }
+
+    .adc-roadmap-dot {
+      width: 10px; height: 10px; border-radius: 50%;
+      background: var(--accent); flex-shrink: 0; margin-top: 6px;
+    }
+
+    .adc-roadmap-item h4 {
+      font-size: 14px; font-weight: 600;
+      color: white; margin-bottom: 6px;
+    }
+
+    .adc-roadmap-item p {
+      font-size: 13px; color: rgba(255,255,255,0.6); line-height: 1.6;
+    }
+
+    @media (max-width: 768px) {
+      .adc-hero-block { grid-template-columns: 1fr; }
+      .adc-wins-grid { grid-template-columns: 1fr 1fr; }
+      .adc-built-grid { grid-template-columns: 1fr; }
+      .adc-roadmap-grid { grid-template-columns: 1fr; }
+    }
+
+    /* ── DIVIDER ── */
+    .divider {
+      width: 60px; height: 2px;
+      background: linear-gradient(to right, var(--accent), transparent);
+      margin: 24px 0 40px;
+    }
+
+    /* ── ANIMATIONS ── */
+    .fade-in {
+      opacity: 0; transform: translateY(24px);
+      animation: fadeIn 0.7s ease forwards;
+    }
+
+    @keyframes fadeIn {
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .fade-in:nth-child(1) { animation-delay: 0.1s; }
+    .fade-in:nth-child(2) { animation-delay: 0.25s; }
+    .fade-in:nth-child(3) { animation-delay: 0.4s; }
+    .fade-in:nth-child(4) { animation-delay: 0.55s; }
+    .fade-in:nth-child(5) { animation-delay: 0.7s; }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 768px) {
+      .about-grid, .contact-inner { grid-template-columns: 1fr; gap: 40px; }
+      .hero-stats { gap: 28px; }
+      nav .nav-links { display: none; }
+      .form-row { grid-template-columns: 1fr; }
+      .footer-top { flex-direction: column; gap: 40px; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a href="#" class="nav-logo">
+    <div class="logo-mark">
+      <svg viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <rect width="40" height="40" rx="6" fill="#0B1F3A"/>
+        <path d="M8 12 L20 12 L32 12" stroke="#2E7AE0" stroke-width="2" stroke-linecap="round"/>
+        <path d="M8 12 L20 28" stroke="white" stroke-width="2" stroke-linecap="round"/>
+        <path d="M20 28 L32 12" stroke="white" stroke-width="2" stroke-linecap="round"/>
+        <circle cx="20" cy="28" r="3" fill="#2E7AE0"/>
+        <circle cx="8" cy="12" r="2" fill="white" opacity="0.5"/>
+        <circle cx="32" cy="12" r="2" fill="white" opacity="0.5"/>
+      </svg>
+    </div>
+    <div class="logo-text">
+      <span class="company">ZetaCore Dynamics</span>
+      <span class="tagline-small">Enterprise Solutions</span>
+    </div>
+  </a>
+  <ul class="nav-links">
+    <li><a href="#about">About</a></li>
+    <li><a href="#projects">Projects</a></li>
+    <li><a href="#aidatacollect">AI Data Collect</a></li>
+    <li><a href="#industries">Industries</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+  <a href="#contact" class="nav-cta">Get in Touch</a>
+</nav>
+
+<!-- HERO -->
+<section class="hero" id="home">
+  <div class="hero-bg"></div>
+  <div class="hero-grid"></div>
+  <div class="hero-content">
+    <div class="hero-eyebrow fade-in">ZetaCore Dynamics — Texas, USA</div>
+    <h1 class="fade-in">
+      Enterprise Software<br />for <em>Complex</em><br />Industries
+    </h1>
+    <p class="hero-desc fade-in">
+      We build precision-grade software solutions for regulated, high-stakes industries that demand reliability, security, and performance. On-premise. Air-gapped. Built to last.
+    </p>
+    <div class="hero-actions fade-in">
+      <a href="#projects" class="btn-primary">View Our Projects</a>
+      <a href="#contact" class="btn-secondary">Contact Us</a>
+    </div>
+    <div class="hero-stats fade-in">
+      <div class="stat-item">
+        <div class="stat-value" style="color: var(--accent);">On-Prem</div>
+        <div class="stat-label">First Architecture</div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-value" style="color: var(--accent);">Air-Gap</div>
+        <div class="stat-label">Ready By Design</div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-value" style="color: var(--accent);">NDAA</div>
+        <div class="stat-label">Compliance Focused</div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-value" style="color: var(--accent);">Cloud ☁️</div>
+        <div class="stat-label">Solutions Coming Soon</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ABOUT -->
+<section class="about" id="about">
+  <div class="about-grid">
+    <div class="about-text">
+      <div class="section-label">About Us</div>
+      <h2>Built for the Industries That Cannot Afford to Fail</h2>
+      <div class="divider"></div>
+      <p>ZetaCore Dynamics is a Texas-based enterprise software company focused on building precision solutions for regulated, high-security, and operationally complex industries.</p>
+      <p>We believe that critical infrastructure deserves software built with the same rigor and reliability it demands — on-premise, secure by design, and purpose-built for real-world operational environments.</p>
+      <p>From our headquarters in Texas, we develop solutions that give organizations in regulated industries the intelligence and visibility they need — without compromising their security posture or compliance requirements.</p>
+      <ul class="values-list">
+        <li>
+          <div class="check">
+            <svg viewBox="0 0 10 10" fill="none"><path d="M2 5l2.5 2.5L8 3" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </div>
+          <span>On-premise first — your data never leaves your facility</span>
+        </li>
+        <li>
+          <div class="check">
+            <svg viewBox="0 0 10 10" fill="none"><path d="M2 5l2.5 2.5L8 3" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </div>
+          <span>Air-gapped and low-bandwidth architecture by design</span>
+        </li>
+        <li>
+          <div class="check">
+            <svg viewBox="0 0 10 10" fill="none"><path d="M2 5l2.5 2.5L8 3" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </div>
+          <span>Built for NDAA, TAA, and industry compliance requirements</span>
+        </li>
+        <li>
+          <div class="check">
+            <svg viewBox="0 0 10 10" fill="none"><path d="M2 5l2.5 2.5L8 3" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </div>
+          <span>Designed for regulated industries with zero tolerance for failure</span>
+        </li>
+      </ul>
+    </div>
+    <div class="about-cards">
+      <div class="about-card">
+        <div class="about-card-icon">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+            <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </div>
+        <h3>Enterprise-Grade Software</h3>
+        <p>Every solution we build is designed to enterprise standards — scalable, secure, and built for long-term operational reliability in demanding environments.</p>
+      </div>
+      <div class="about-card">
+        <div class="about-card-icon">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+            <rect x="3" y="11" width="18" height="11" rx="2" stroke="white" stroke-width="1.5"/>
+            <path d="M7 11V7a5 5 0 0110 0v4" stroke="white" stroke-width="1.5" stroke-linecap="round"/>
+          </svg>
+        </div>
+        <h3>Security by Architecture</h3>
+        <p>We engineer security into the foundation of every product — not as an afterthought. On-premise deployment, air-gap capability, and end-to-end data sovereignty.</p>
+      </div>
+      <div class="about-card">
+        <div class="about-card-icon">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+            <circle cx="12" cy="12" r="10" stroke="white" stroke-width="1.5"/>
+            <path d="M12 6v6l4 2" stroke="white" stroke-width="1.5" stroke-linecap="round"/>
+          </svg>
+        </div>
+        <h3>Purpose-Built Solutions</h3>
+        <p>We don't build generic software and apply it to regulated industries. We study the operational realities of each vertical and engineer solutions from the ground up.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PROJECTS -->
+<section class="projects" id="projects">
+  <div class="section-label">Our Portfolio</div>
+  <h2>Current &amp; Upcoming Projects</h2>
+  <p class="section-desc">
+    ZetaCore Dynamics is actively developing a portfolio of enterprise software solutions targeting regulated and operationally complex industries. Each product is built to our on-premise, security-first standard.
+  </p>
+  <div class="projects-grid">
+    <!-- Featured: AI Data Collect -->
+    <div class="project-card featured">
+      <span class="project-badge">Flagship Product</span>
+      <span class="project-coming-soon">In Development</span>
+      <h3>AI Data Collect</h3>
+      <p>A self-hosted, enterprise-grade metadata ingest platform for AI-capable IP cameras. Real-time event streaming via MQTT, scheduled statistical reporting via SFTP, and a secure React analytics portal — all on-premise, no video cloud.</p>
+      <div class="project-tags">
+        <span class="project-tag">On-Premise</span>
+        <span class="project-tag">MQTT</span>
+        <span class="project-tag">TimescaleDB</span>
+        <span class="project-tag">Air-Gapped</span>
+        <span class="project-tag">NDAA</span>
+      </div>
+    </div>
+    <!-- Future 1 -->
+    <div class="project-card">
+      <span class="project-badge">Coming Soon</span>
+      <h3>ZetaCore Compliance Engine</h3>
+      <p>An automated compliance monitoring and audit trail platform for regulated industries. Designed to simplify the burden of ongoing regulatory reporting and documentation.</p>
+      <div class="project-tags">
+        <span class="project-tag">Compliance</span>
+        <span class="project-tag">Audit Trail</span>
+        <span class="project-tag">Regulated Industries</span>
+      </div>
+    </div>
+    <!-- Future 2 -->
+    <div class="project-card">
+      <span class="project-badge">In Planning</span>
+      <h3>ZetaCore Edge Analytics</h3>
+      <p>Edge-compute analytics for industrial and infrastructure environments where cloud connectivity is limited, restricted, or cost-prohibitive. Intelligence at the source.</p>
+      <div class="project-tags">
+        <span class="project-tag">Edge Computing</span>
+        <span class="project-tag">Industrial IoT</span>
+        <span class="project-tag">Low Bandwidth</span>
+      </div>
+    </div>
+    <!-- Cloud Solutions -->
+    <div class="project-card">
+      <span class="project-badge">Coming Soon</span>
+      <h3>ZetaCore Cloud Solutions ☁️</h3>
+      <p>Enterprise cloud-based software solutions for organizations ready to leverage the scalability and flexibility of modern cloud infrastructure — built to ZetaCore's security and reliability standards.</p>
+      <div class="project-tags">
+        <span class="project-tag">Cloud Native</span>
+        <span class="project-tag">SaaS</span>
+        <span class="project-tag">Scalable</span>
+        <span class="project-tag">Enterprise</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ADC DEEP DIVE -->
+<section class="adc-section" id="aidatacollect">
+  <div class="section-label">Flagship Product</div>
+  <h2>AI Data Collect — Deep Dive</h2>
+  <p class="section-desc">The operational analytics layer that sits on top of the AI cameras you already own — self-hosted, video-free, deployable in the places a VMS can't legally or technically reach.</p>
+
+  <!-- What it is -->
+  <div class="adc-hero-block">
+    <div class="adc-hero-text">
+      <h3>What It Is</h3>
+      <p>A self-hosted, enterprise-grade camera analytics platform that turns AI-capable IP cameras into a structured event stream — without ever recording, transcoding, or proxying video.</p>
+      <p>ADC ingests structured metadata — line crossings, occupancy counts, queue lengths, heatmaps, object detections — directly from the camera's onboard AI via MQTT and SFTP reports. No video on the wire, no GPU farm, no cloud upsell. Just the events that actually drive operational decisions, persisted in TimescaleDB on a box the customer owns.</p>
+    </div>
+    <div class="adc-pitch-box">
+      <div class="adc-pitch-label">The One-Line Pitch</div>
+      <blockquote class="adc-quote">"ADC is the operational analytics layer that sits on top of the AI cameras you already own — self-hosted, video-free, deployable in the places a VMS can't legally or technically reach."</blockquote>
+    </div>
+  </div>
+
+  <!-- Why it wins -->
+  <div class="adc-wins-grid">
+    <div class="adc-win-card">
+      <div class="adc-win-icon">📡</div>
+      <h4>Bandwidth</h4>
+      <p>Works on industrial LANs, cellular failover, satellite uplinks, and regulated networks where streaming video is forbidden or impractical.</p>
+    </div>
+    <div class="adc-win-card">
+      <div class="adc-win-icon">💾</div>
+      <h4>Storage</h4>
+      <p>A full year of analytics fits where one week of 4K video would. 30/60/90-day retention is a deployment knob, not a hardware constraint.</p>
+    </div>
+    <div class="adc-win-card">
+      <div class="adc-win-icon">⚖️</div>
+      <h4>Compliance</h4>
+      <p>No video means no privacy minefield. Banks, schools, cannabis retailers, government facilities, and corrections deploy without the legal review video systems trigger.</p>
+    </div>
+    <div class="adc-win-card">
+      <div class="adc-win-icon">🔒</div>
+      <h4>Air-Gap by Default</h4>
+      <p>Designed to run with zero outbound internet. Internal CA, encrypted credentials at rest (Fernet), TLS-everywhere, signed-license offline activation in the roadmap.</p>
+    </div>
+  </div>
+
+  <!-- What's built -->
+  <div class="adc-built-section">
+    <h3>What's Actually Built Today <span class="adc-not-vapor">(Not Vapor)</span></h3>
+    <div class="adc-built-grid">
+      <div class="adc-built-item">
+        <div class="adc-built-icon">⚡</div>
+        <div>
+          <h4>One-Shot Install</h4>
+          <p>install.sh with port pre-flight and auto-shift on collision, post-install shortcuts (adc-code, adc-ports), encrypted access codes, end-to-end first-run setup wizard.</p>
+        </div>
+      </div>
+      <div class="adc-built-item">
+        <div class="adc-built-icon">🛡️</div>
+        <div>
+          <h4>Hardened Auth</h4>
+          <p>JWT + TOTP 2FA, invite-link onboarding, RBAC v2 with 14 named permissions and per-site data scoping enforced across 204 endpoints, full audit log.</p>
+        </div>
+      </div>
+      <div class="adc-built-item">
+        <div class="adc-built-icon">📊</div>
+        <div>
+          <h4>Customer Dashboard</h4>
+          <p>5-tile health board, since-yesterday delta, sites rollup, multi-card camera-group occupancy with daily and weekly chart views.</p>
+        </div>
+      </div>
+      <div class="adc-built-item">
+        <div class="adc-built-icon">🔔</div>
+        <div>
+          <h4>Alerts Engine</h4>
+          <p>Cooldown, snooze, multi-event-type, day-of-week schedule, multi-window, per-zone, friendly-name notifications via Slack, Email, Teams, and Webhooks. Per-alert JPEG snapshot capture.</p>
+        </div>
+      </div>
+      <div class="adc-built-item">
+        <div class="adc-built-icon">🔍</div>
+        <div>
+          <h4>Investigation Surface</h4>
+          <p>Alert detail page with neighbor table, thumbnails, CSV export, deep-link from dashboard health tiles.</p>
+        </div>
+      </div>
+      <div class="adc-built-item">
+        <div class="adc-built-icon">📷</div>
+        <div>
+          <h4>Camera Driver Pack (CDP v2)</h4>
+          <p>Driver-pack architecture handling Hanwha firmware variation across W5/W7/W8/W9/X+/fisheye/multisensor. Sandbox tester, capability oracle, signed validators. Designed to extend to Axis and Bosch.</p>
+        </div>
+      </div>
+      <div class="adc-built-item">
+        <div class="adc-built-icon">🔐</div>
+        <div>
+          <h4>Security Infrastructure</h4>
+          <p>TLS-by-default MQTT (EMQX with internal CA), SFTPGo for camera reports, encrypted-at-rest credentials, 30/60/90 unified retention with automatic heatmap and snapshot purge, backup/restore with pre-restore validation.</p>
+        </div>
+      </div>
+      <div class="adc-built-item">
+        <div class="adc-built-icon">🗂️</div>
+        <div>
+          <h4>Industry Presets</h4>
+          <p>11 industries across 4 buckets — Regulated Retail, Industrial/Logistics, Public Sector, and Crowd Venues — each with shipped configuration presets.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Roadmap -->
+  <div class="adc-roadmap">
+    <h3>Where It's Going</h3>
+    <div class="adc-roadmap-grid">
+      <div class="adc-roadmap-item">
+        <div class="adc-roadmap-dot"></div>
+        <div>
+          <h4>Per-Device Licensing</h4>
+          <p>Hybrid online/offline activation with a vendor-run license portal.</p>
+        </div>
+      </div>
+      <div class="adc-roadmap-item">
+        <div class="adc-roadmap-dot"></div>
+        <div>
+          <h4>Multi-Vendor Expansion</h4>
+          <p>Axis and Bosch CDP packs extending camera compatibility.</p>
+        </div>
+      </div>
+      <div class="adc-roadmap-item">
+        <div class="adc-roadmap-dot"></div>
+        <div>
+          <h4>Hub-and-Spoke Management</h4>
+          <p>One login across 30+ sites — each box fully self-sufficient if hub goes offline.</p>
+        </div>
+      </div>
+      <div class="adc-roadmap-item">
+        <div class="adc-roadmap-dot"></div>
+        <div>
+          <h4>VMS Integrations</h4>
+          <p>Genetec, Milestone, Hanwha WAVE webhook integrations — ADC stays the analytics brain, your VMS stays the video layer.</p>
+        </div>
+      </div>
+      <div class="adc-roadmap-item">
+        <div class="adc-roadmap-dot"></div>
+        <div>
+          <h4>Packaged Distributions</h4>
+          <p>Per-industry ISO, appliance image, and cloud-marketplace AMI distributions.</p>
+        </div>
+      </div>
+      <div class="adc-roadmap-item">
+        <div class="adc-roadmap-dot"></div>
+        <div>
+          <h4>Public Compatibility Directory</h4>
+          <p>Supported-cameras website and public compatibility directory for integrators.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div style="text-align:center; margin-top: 60px;">
+    <a href="#contact" class="btn-primary">Request a Proof of Concept</a>
+  </div>
+</section>
+
+<!-- INDUSTRIES -->
+<section class="industries" id="industries">
+  <div class="section-label">Target Markets</div>
+  <h2>Industries We Serve</h2>
+  <p class="section-desc">
+    Our solutions are designed for industries operating under regulatory pressure, security mandates, or complex operational requirements where off-the-shelf software falls short.
+  </p>
+  <div class="industries-grid">
+    <div class="industry-item">
+      <span class="industry-icon">🏦</span>
+      <div class="industry-name">Banking &amp; Finance</div>
+    </div>
+    <div class="industry-item">
+      <span class="industry-icon">🌿</span>
+      <div class="industry-name">Cannabis &amp; Dispensaries</div>
+    </div>
+    <div class="industry-item">
+      <span class="industry-icon">🏭</span>
+      <div class="industry-name">Manufacturing</div>
+    </div>
+    <div class="industry-item">
+      <span class="industry-icon">⚡</span>
+      <div class="industry-name">Energy &amp; Oil &amp; Gas</div>
+    </div>
+    <div class="industry-item">
+      <span class="industry-icon">✈️</span>
+      <div class="industry-name">Airports &amp; Aviation</div>
+    </div>
+    <div class="industry-item">
+      <span class="industry-icon">🚦</span>
+      <div class="industry-name">Intelligent Transportation</div>
+    </div>
+    <div class="industry-item">
+      <span class="industry-icon">🏛️</span>
+      <div class="industry-name">Government &amp; Public Sector</div>
+    </div>
+    <div class="industry-item">
+      <span class="industry-icon">🔒</span>
+      <div class="industry-name">Corrections &amp; Security</div>
+    </div>
+    <div class="industry-item">
+      <span class="industry-icon">🚚</span>
+      <div class="industry-name">Logistics &amp; Data Centers</div>
+    </div>
+    <div class="industry-item">
+      <span class="industry-icon">🎓</span>
+      <div class="industry-name">Education</div>
+    </div>
+    <div class="industry-item">
+      <span class="industry-icon">🏟️</span>
+      <div class="industry-name">Stadiums &amp; Venues</div>
+    </div>
+    <div class="industry-item">
+      <span class="industry-icon">🏥</span>
+      <div class="industry-name">Healthcare &amp; Life Sciences</div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section class="contact" id="contact">
+  <div class="contact-inner">
+    <div class="contact-info">
+      <div class="section-label">Get In Touch</div>
+      <h2>Let's Talk About Your Project</h2>
+      <div class="divider"></div>
+      <p>Whether you're interested in a proof of concept, have a specific operational challenge, or want to learn more about our upcoming products — we'd love to hear from you.</p>
+      <div class="contact-detail">
+        <div class="contact-icon">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none">
+            <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z" stroke="#2E7AE0" stroke-width="1.5"/>
+            <path d="M22 6l-10 7L2 6" stroke="#2E7AE0" stroke-width="1.5"/>
+          </svg>
+        </div>
+        <div class="contact-detail-text">
+          <div class="contact-detail-label">General Inquiries</div>
+          <div class="contact-detail-value"><a href="mailto:bradford@zetacoredynamics.com">bradford@zetacoredynamics.com</a></div>
+        </div>
+      </div>
+      <div class="contact-detail">
+        <div class="contact-icon">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none">
+            <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z" stroke="#2E7AE0" stroke-width="1.5"/>
+            <path d="M22 6l-10 7L2 6" stroke="#2E7AE0" stroke-width="1.5"/>
+          </svg>
+        </div>
+        <div class="contact-detail-text">
+          <div class="contact-detail-label">AI Data Collect</div>
+          <div class="contact-detail-value"><a href="mailto:info@aidatacollect.com">info@aidatacollect.com</a></div>
+        </div>
+      </div>
+      <div class="contact-detail">
+        <div class="contact-icon">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none">
+            <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z" stroke="#2E7AE0" stroke-width="1.5"/>
+            <circle cx="12" cy="10" r="3" stroke="#2E7AE0" stroke-width="1.5"/>
+          </svg>
+        </div>
+        <div class="contact-detail-text">
+          <div class="contact-detail-label">Headquarters</div>
+          <div class="contact-detail-value">Denton County, Texas, USA</div>
+        </div>
+      </div>
+    </div>
+    <div class="contact-form">
+      <h3>Send Us a Message</h3>
+      <div class="form-row">
+        <div class="form-group">
+          <label>First Name</label>
+          <input type="text" placeholder="John" />
+        </div>
+        <div class="form-group">
+          <label>Last Name</label>
+          <input type="text" placeholder="Smith" />
+        </div>
+      </div>
+      <div class="form-group">
+        <label>Email Address</label>
+        <input type="email" placeholder="john@company.com" />
+      </div>
+      <div class="form-group">
+        <label>Company</label>
+        <input type="text" placeholder="Your Organization" />
+      </div>
+      <div class="form-group">
+        <label>Area of Interest</label>
+        <select>
+          <option value="">Select one...</option>
+          <option>AI Data Collect — POC Inquiry</option>
+          <option>General Partnership</option>
+          <option>Investment Inquiry</option>
+          <option>Other</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label>Message</label>
+        <textarea placeholder="Tell us about your project or challenge..."></textarea>
+      </div>
+      <button class="form-submit" onclick="alert('Thank you! We will be in touch shortly.')">Send Message</button>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-top">
+    <div class="footer-brand">
+      <div class="company">ZetaCore Dynamics</div>
+      <p>Enterprise software solutions for the industries that demand precision, security, and reliability. Built in Texas.</p>
+    </div>
+    <div class="footer-links">
+      <h4>Navigation</h4>
+      <ul>
+        <li><a href="#about">About</a></li>
+        <li><a href="#projects">Projects</a></li>
+        <li><a href="#industries">Industries</a></li>
+        <li><a href="#contact">Contact</a></li>
+      </ul>
+    </div>
+    <div class="footer-links">
+      <h4>Products</h4>
+      <ul>
+        <li><a href="https://aidatacollect.com">AI Data Collect</a></li>
+        <li><a href="#projects">ZetaCore Compliance Engine</a></li>
+        <li><a href="#projects">ZetaCore Edge Analytics</a></li>
+      </ul>
+    </div>
+    <div class="footer-links">
+      <h4>Contact</h4>
+      <ul>
+        <li><a href="mailto:bradford@zetacoredynamics.com">bradford@zetacoredynamics.com</a></li>
+        <li><a href="mailto:info@aidatacollect.com">info@aidatacollect.com</a></li>
+        <li><a href="#">Denton County, Texas</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <span>&copy; 2026 ZetaCore Dynamics LLC. All rights reserved.</span>
+    <span>Built in Texas &nbsp;🤠</span>
+  </div>
+</footer>
+
+</body>
+</html>
