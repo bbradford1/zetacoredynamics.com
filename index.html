@@ -27,10 +27,10 @@
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet" />
 
   <!-- Stylesheet -->
-  <link rel="stylesheet" href="css/main.css" />
+  <link rel="stylesheet" href="css/main.css?v=20260511" />
 
   <!-- Behavior -->
-  <script src="js/main.js" defer></script>
+  <script src="js/main.js?v=20260511" defer></script>
 </head>
 <body>
 
@@ -315,8 +315,14 @@
         </div>
       </div>
     </div>
-    <form class="contact-form" id="contact-form" novalidate>
+    <form class="contact-form" id="contact-form"
+          action="https://formspree.io/f/mnjwlgpj"
+          method="POST" novalidate>
       <h3>Send Us a Message</h3>
+      <!-- Honeypot: hidden from humans, bots fill it in and get dropped -->
+      <input type="text" name="_gotcha" tabindex="-1" autocomplete="off"
+             style="position:absolute;left:-9999px;width:1px;height:1px;opacity:0;" aria-hidden="true" />
+      <input type="hidden" name="_subject" value="New Contact Form Submission — ZetaCore Dynamics" />
       <div class="form-row">
         <div class="form-group">
           <label for="contact-first-name">First Name</label>

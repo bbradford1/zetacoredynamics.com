@@ -45,13 +45,56 @@
     var form = document.getElementById('contact-form');
     if (!form) return;
     var status = form.querySelector('.form-status');
+    var submitBtn = form.querySelector('.form-submit');
+
+    function setStatus(msg, kind) {
+      if (!status) return;
+      status.textContent = msg;
+      status.classList.remove('success', 'error');
+      if (kind === 'success') status.classList.add('success');
+      else if (kind === 'error') status.classList.add('error');
+    }
 
     form.addEventListener('submit', function (e) {
       e.preventDefault();
-      if (status) {
-        status.textContent = 'Thanks — we received your note and will be in touch shortly.';
+
+      // Honeypot tripwire — if a bot filled it, silently succeed
+      var honeypot = form.querySelector('input[name="_gotcha"]');
+      if (honeypot && honeypot.value) { form.reset(); return; }
+
+      var endpoint = form.getAttribute('action');
+      if (!endpoint || endpoint.indexOf('REPLACE_WITH_FORMSPREE_ID') !== -1) {
+        setStatus('Form endpoint not configured yet. Please email info@zetacoredynamics.com directly.', 'error');
+        return;
       }
-      form.reset();
+
+      if (submitBtn) { submitBtn.disabled = true; submitBtn.textContent = 'Sending…'; }
+      setStatus('');
+
+      fetch(endpoint, {
+        method: 'POST',
+        body: new FormData(form),
+        headers: { 'Accept': 'application/json' }
+      }).then(function (resp) {
+        if (resp.ok) {
+          form.reset();
+          setStatus('Thanks! Your message was received. We will be in touch at the email you provided.', 'success');
+          if (status && status.scrollIntoView) status.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        } else {
+          resp.json().then(function (data) {
+            var msg = (data && data.errors && data.errors[0] && data.errors[0].message)
+              ? data.errors[0].message
+              : 'Something went wrong. Please email info@zetacoredynamics.com directly.';
+            setStatus(msg, 'error');
+          }).catch(function () {
+            setStatus('Something went wrong. Please email info@zetacoredynamics.com directly.', 'error');
+          });
+        }
+      }).catch(function () {
+        setStatus('Network error. Please email info@zetacoredynamics.com directly.', 'error');
+      }).then(function () {
+        if (submitBtn) { submitBtn.disabled = false; submitBtn.textContent = 'Send Message'; }
+      });
     });
   }
 

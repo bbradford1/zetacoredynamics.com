@@ -595,6 +595,53 @@ a.project-card {
   min-height: 20px;
 }
 
+.form-status.success,
+.form-status.error {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  margin-top: 20px;
+  padding: 16px 18px;
+  border-radius: 8px;
+  font-family: 'DM Sans', sans-serif;
+  font-size: 15px;
+  font-weight: 500;
+  line-height: 1.45;
+  min-height: auto;
+}
+
+.form-status.success {
+  background: rgba(46, 122, 224, 0.08);
+  border-left: 4px solid #2E7AE0;
+  color: #0B1F3A;
+}
+
+.form-status.error {
+  background: rgba(179, 38, 30, 0.06);
+  border-left: 4px solid #b3261e;
+  color: #6b1f19;
+}
+
+.form-status.success::before,
+.form-status.error::before {
+  content: "";
+  flex: 0 0 22px;
+  width: 22px;
+  height: 22px;
+  margin-top: 1px;
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: 22px 22px;
+}
+
+.form-status.success::before {
+  background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none'><circle cx='12' cy='12' r='10' fill='%232E7AE0'/><path d='M7.5 12.5l3 3 6-6' stroke='white' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'/></svg>");
+}
+
+.form-status.error::before {
+  background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none'><circle cx='12' cy='12' r='10' fill='%23b3261e'/><path d='M12 7v6M12 16.5v.5' stroke='white' stroke-width='2' stroke-linecap='round'/></svg>");
+}
+
 /* ── FOOTER ── */
 footer {
   background: var(--navy);
