@@ -338,6 +338,10 @@ h2 {
   background: var(--white);
 }
 
+a.project-card {
+  display: block; text-decoration: none; color: inherit; cursor: pointer;
+}
+
 .project-card:hover {
   border-color: var(--accent);
   box-shadow: 0 12px 40px rgba(46,122,224,0.08);
