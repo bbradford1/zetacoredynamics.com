@@ -440,7 +440,7 @@ a.project-card {
 
 .industries-grid {
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
+  grid-template-columns: repeat(4, 1fr);
   gap: 2px;
   border: 1px solid var(--gray-200);
   border-radius: 8px;
@@ -777,6 +777,7 @@ footer {
 @media (max-width: 1024px) {
   .about-grid { gap: 56px; }
   .contact-inner { gap: 56px; }
+  .industries-grid { grid-template-columns: repeat(3, 1fr); }
   .adc-wins-grid { grid-template-columns: repeat(2, 1fr); }
   .adc-roadmap-grid { grid-template-columns: repeat(2, 1fr); }
   .nav-links { gap: 24px; }
