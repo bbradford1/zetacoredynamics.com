@@ -328,7 +328,7 @@ h2 {
 .projects-grid {
   display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
   gap: 28px;
-  max-width: 720px; margin: 0 auto;
+  max-width: 720px;
 }
 
 .project-card {
@@ -414,12 +414,33 @@ a.project-card {
   background: var(--gray-100); color: var(--gray-400);
 }
 
-/* ── INDUSTRIES ── */
-.industries { background: var(--off-white); }
+/* ── INDUSTRIES (subsection within About) ── */
+.about-industries {
+  margin-top: 80px;
+  padding-top: 64px;
+  border-top: 1px solid var(--gray-200);
+}
+
+.about-industries h3 {
+  font-family: var(--font-display);
+  font-size: clamp(24px, 3.5vw, 32px);
+  font-weight: 400;
+  color: var(--navy);
+  margin-bottom: 12px;
+  letter-spacing: -0.01em;
+}
+
+.about-industries > p {
+  color: var(--gray-600);
+  font-size: 16px;
+  line-height: 1.6;
+  margin-bottom: 36px;
+  max-width: 720px;
+}
 
 .industries-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  grid-template-columns: repeat(3, 1fr);
   gap: 2px;
   border: 1px solid var(--gray-200);
   border-radius: 8px;
@@ -812,6 +833,8 @@ footer {
 
   .about-grid { grid-template-columns: 1fr; gap: 40px; }
   .about-card { padding: 28px; }
+  .about-industries { margin-top: 56px; padding-top: 48px; }
+  .about-industries > p { margin-bottom: 28px; }
 
   .projects-grid { grid-template-columns: 1fr; gap: 20px; }
   .project-card { padding: 28px; }
