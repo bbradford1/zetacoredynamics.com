@@ -433,62 +433,6 @@ a.project-card {
   background: var(--gray-100); color: var(--gray-400);
 }
 
-/* ── INDUSTRIES (subsection within About) ── */
-.about-industries {
-  margin-top: 80px;
-  padding-top: 64px;
-  border-top: 1px solid var(--gray-200);
-}
-
-.about-industries h3 {
-  font-family: var(--font-display);
-  font-size: clamp(24px, 3.5vw, 32px);
-  font-weight: 400;
-  color: var(--navy);
-  margin-bottom: 12px;
-  letter-spacing: -0.01em;
-}
-
-.about-industries > p {
-  color: var(--gray-600);
-  font-size: 16px;
-  line-height: 1.6;
-  margin-bottom: 36px;
-  max-width: 720px;
-}
-
-.industries-grid {
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  gap: 2px;
-  border: 1px solid var(--gray-200);
-  border-radius: 8px;
-  overflow: hidden;
-}
-
-.industry-item {
-  background: var(--white);
-  padding: 28px 24px;
-  transition: all 0.2s;
-  cursor: default;
-}
-
-.industry-item:hover { background: var(--navy); }
-.industry-item:hover .industry-name { color: var(--white); }
-.industry-item:hover .industry-icon { color: var(--accent-light); }
-
-.industry-icon {
-  font-size: 24px; color: var(--accent);
-  margin-bottom: 12px; display: block;
-  transition: color 0.2s;
-}
-
-.industry-name {
-  font-size: 13px; font-weight: 500;
-  color: var(--navy); letter-spacing: 0.02em;
-  transition: color 0.2s;
-}
-
 /* ── CONTACT ── */
 .contact { background: var(--white); }
 
@@ -843,7 +787,6 @@ footer {
 @media (max-width: 1024px) {
   .about-grid { gap: 56px; }
   .contact-inner { gap: 56px; }
-  .industries-grid { grid-template-columns: repeat(3, 1fr); }
   .hero-inner { gap: 56px; }
   .adc-wins-grid { grid-template-columns: repeat(2, 1fr); }
   .adc-roadmap-grid { grid-template-columns: repeat(2, 1fr); }
@@ -902,13 +845,9 @@ footer {
 
   .about-grid { grid-template-columns: 1fr; gap: 40px; }
   .about-card { padding: 28px; }
-  .about-industries { margin-top: 56px; padding-top: 48px; }
-  .about-industries > p { margin-bottom: 28px; }
 
   .projects-grid { grid-template-columns: 1fr; gap: 20px; }
   .project-card { padding: 28px; }
-
-  .industries-grid { grid-template-columns: repeat(2, 1fr); }
 
   .contact-inner { grid-template-columns: 1fr; gap: 40px; }
   .form-row { grid-template-columns: 1fr; }
@@ -924,7 +863,6 @@ footer {
 /* ── RESPONSIVE: SMALL PHONE (≤480px) ── */
 @media (max-width: 480px) {
   .adc-wins-grid { grid-template-columns: 1fr; }
-  .industries-grid { grid-template-columns: 1fr; }
   .hero-actions { flex-direction: column; align-items: stretch; }
   .hero-actions .btn-primary,
   .hero-actions .btn-secondary { width: 100%; text-align: center; }
