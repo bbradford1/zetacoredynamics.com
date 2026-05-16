@@ -5,7 +5,42 @@
     initMobileNav();
     initContactForm();
     initHeaderShadowOnScroll();
+    initThemeToggle();
   });
+
+  function initThemeToggle() {
+    var btn = document.querySelector('.theme-toggle');
+    if (!btn) return;
+    var THEMES = ['light', 'blue', 'dark'];
+    var THEME_META = {
+      light: '#0B1F3A',
+      blue:  '#0B1F3A',
+      dark:  '#0A0B0E'
+    };
+    var metaThemeColor = document.querySelector('meta[name="theme-color"]');
+
+    function currentTheme() {
+      var t = document.documentElement.getAttribute('data-theme');
+      return THEMES.indexOf(t) >= 0 ? t : 'light';
+    }
+    function applyTheme(t) {
+      if (t === 'light') document.documentElement.removeAttribute('data-theme');
+      else document.documentElement.setAttribute('data-theme', t);
+      try { localStorage.setItem('zcd-theme', t); } catch (e) {}
+      if (metaThemeColor && THEME_META[t]) metaThemeColor.setAttribute('content', THEME_META[t]);
+      btn.setAttribute('aria-label', 'Switch theme (current: ' + t + ')');
+      btn.setAttribute('title', 'Theme: ' + t + ' — click to switch');
+    }
+    // If pre-paint set an unknown theme (e.g. ?theme=dark-a preview), leave it alone
+    // until the user clicks the toggle.
+    var preset = document.documentElement.getAttribute('data-theme');
+    if (!preset || THEMES.indexOf(preset) >= 0) applyTheme(currentTheme());
+
+    btn.addEventListener('click', function () {
+      var idx = THEMES.indexOf(currentTheme());
+      applyTheme(THEMES[(idx + 1) % THEMES.length]);
+    });
+  }
 
   function initMobileNav() {
     var toggle = document.querySelector('.nav-toggle');
@@ -104,8 +139,7 @@
     var ticking = false;
     function update() {
       ticking = false;
-      if (window.scrollY > 8) nav.style.boxShadow = '0 1px 12px rgba(11,31,58,0.06)';
-      else nav.style.boxShadow = 'none';
+      nav.classList.toggle('is-scrolled', window.scrollY > 8);
     }
     window.addEventListener('scroll', function () {
       if (!ticking) {

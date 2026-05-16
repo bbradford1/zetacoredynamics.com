@@ -4,9 +4,25 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
   <meta name="description" content="ZetaCore Dynamics is a Texas-based parent company developing purpose-engineered ventures for regulated and operationally complex industries. Parent of AI Data Collect." />
-  <meta name="theme-color" content="#0B1F3A" />
-  <meta name="color-scheme" content="light" />
+  <meta name="theme-color" content="#0A0B0E" />
+  <meta name="color-scheme" content="dark light" />
   <link rel="canonical" href="https://zetacoredynamics.com/" />
+
+  <!-- Apply persisted theme before paint to avoid flash. Default is dark; ?theme=light|blue|dark overrides for preview/sharing. -->
+  <script>
+    (function () {
+      try {
+        var m = location.search.match(/[?&]theme=([a-z-]+)/);
+        var stored = localStorage.getItem('zcd-theme');
+        var t = m ? m[1] : (stored || 'dark');
+        if (t && t !== 'light') {
+          document.documentElement.setAttribute('data-theme', t);
+        }
+      } catch (e) {
+        document.documentElement.setAttribute('data-theme', 'dark');
+      }
+    })();
+  </script>
 
   <!-- Open Graph / social -->
   <meta property="og:title" content="ZetaCore Dynamics — Engineered for Complex Industries" />
@@ -27,10 +43,10 @@
   <link rel="icon" href="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 40 40'><rect width='40' height='40' rx='6' fill='%230B1F3A'/><path d='M8 12 L20 12 L32 12' stroke='%232E7AE0' stroke-width='2' stroke-linecap='round'/><path d='M8 12 L20 28' stroke='white' stroke-width='2' stroke-linecap='round'/><path d='M20 28 L32 12' stroke='white' stroke-width='2' stroke-linecap='round'/><circle cx='20' cy='28' r='3' fill='%232E7AE0'/></svg>" />
 
   <!-- Stylesheet (self-hosted fonts loaded via @font-face inside) -->
-  <link rel="stylesheet" href="css/main.css?v=20260515" />
+  <link rel="stylesheet" href="css/main.css?v=20260516" />
 
   <!-- Behavior -->
-  <script src="js/main.js?v=20260515" defer></script>
+  <script src="js/main.js?v=20260516" defer></script>
 </head>
 <body>
 
@@ -59,6 +75,20 @@
     <li><a href="#projects">Projects</a></li>
     <li><a href="#contact">Contact</a></li>
   </ul>
+  <button class="theme-toggle" type="button"
+          aria-label="Switch theme"
+          title="Switch theme">
+    <svg class="theme-icon theme-icon-light" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+      <circle cx="12" cy="12" r="4"/>
+      <path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41"/>
+    </svg>
+    <svg class="theme-icon theme-icon-blue" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+      <path d="M12 2.5c-3 4.5-6 7.5-6 11.5a6 6 0 0 0 12 0c0-4-3-7-6-11.5z"/>
+    </svg>
+    <svg class="theme-icon theme-icon-dark" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+      <path d="M20 14.5A8 8 0 1 1 9.5 4a6.5 6.5 0 0 0 10.5 10.5z"/>
+    </svg>
+  </button>
   <a href="#contact" class="nav-cta">Get in Touch</a>
   <button class="nav-toggle" type="button"
           aria-label="Open navigation menu"
